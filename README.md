@@ -1,7 +1,10 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-#### Cg\_oxidative\_stress: repository of all R scripts used to generate results figure.
+Cg\_oxidative\_stress:
+----------------------
 
-##### Author
+Repository of all scripts used to generate results figure.
+
+### Author
 
 Pooja Sethiya
 
