@@ -1,0 +1,19 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+html_preview: false
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+
+# Cg_oxidative_stress: repository of all R scripts used to generate results figure. 
+
+## Author
+
+Pooja Sethiya
+
+Faculty of Health Sciences, University of Macau
+
+`r badger::badge_custom( "Repository", "blue", "https://github.com/sethiyap/Cg_oxidative_stress/blob/master/CgOxidativeStressPaper.md")`
