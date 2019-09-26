@@ -1,22 +1,27 @@
 ---
-title: "*Candida glabrata* response and adaptation to oxidative environment."
-author: "*Pooja Sethiya*, <br> Koon Ho Wong's lab, <br> University of Macau"
 output:
   html_document: 
-    keep_md: TRUE 
+    keep_md: TRUE
     toc: TRUE
     toc_float: 
           toc_collapsed: FALSE
           smooth_scroll: TRUE
-    toc_depth: 2
-    number_sections: TRUE
+    toc_depth: 3
+    number_sections: FALSE
     theme: journal
     highlight: pygments
 ---
 
-# . Immediate response to oxidative shock
+# *Candida glabrata* response and adaptation to oxidative environment.
 
-## . Number of Differentially expressed genes under each time-point
+#### Author: 
+*Pooja Sethiya*
+
+Koon Ho Wong's lab, University of Macau
+
+## Immediate response to oxidative shock
+
+### 1. Number of Differentially expressed genes under each time-point
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
 expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
@@ -46,7 +51,7 @@ plot_bar <- expression_file_long %>%
 ```
 ![](CgH2O2_acute_barplot.png)
 
-## . Distribution of genes expression
+### 2. Distribution of genes expression
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 expression_file_box <- expression_file %>% 
                               dplyr::select(-c("4h")) %>%
@@ -70,7 +75,7 @@ plot_box <- expression_file_box %>%
 ```
 ![](CgH2O2_acute_boxplot.png)
 
-## . Overlapping genes upon oxidative shock
+### 3. Overlapping genes upon oxidative shock
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 library(UpSetR)
 dat_venn1 <-  read.table("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_venn_input.txt", sep="\t", header=TRUE)
@@ -89,11 +94,11 @@ upset_venn1 <- upset(fromList(c1),
           sets.bar.color = c( "blue","blue","blue", "red", "red", "red"),
           text.scale=2, sets.x.label = "No. of genes")
 
-print(upset_venn1)
 ```
+![](CgH2O2_immediate_vennplot.png)
 
 
-## . Classification of genes based on expression in acute oxidative stress across time-point
+### 4. Classification of genes based on expression in acute oxidative stress across time-point
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 group_genes <- expression_file %>% 
@@ -115,7 +120,7 @@ plot_line <- group_genes %>% ggplot(aes(Time, LFC, group=ORF, color=Group))+geom
 ```
 ![](CgH2O2_immediate_lineplot.png)
 
-## . Functional analysis of genes within each group. 
+### 5. Functional analysis of genes within each group. 
 GO analysis was performed for each group using FungiDb
 
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
@@ -148,9 +153,9 @@ ggsave(GO_group, filename = "CgH2O2_lineplot_GO.png", width=10, height =7 )
 ```
 ![](CgH2O2_lineplot_GO.png)
 
-# . Adaptation to oxidative stress
+## Adaptation to oxidative stress
 
-## . Growth curve
+### 1. Growth curve
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 library(ggalt)
 
@@ -175,7 +180,7 @@ gg_growth <- ggplot(summ_dat,aes(Time, mean, color=condition))+geom_line(lwd=0.8
 ```
 ![](CgH2O2_growthcurve_plot.png)
 
-## . RNAP subunits expression
+### 2. RNAP subunits expression
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 dat_rnap <- read_delim("CgH2O2_adaptation_RNAP.txt", delim="\t", col_names = TRUE)
@@ -193,7 +198,7 @@ rnap_plot <- dat_rnap %>%
 ```
 ![](CgH2O2_adaptation_RNAP_plot.png)
 
-## . RNA degradation 
+### 3. RNA degradation 
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 dat_rnad <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_adaptation_RNAdegradation.txt", col_names = TRUE)
@@ -215,9 +220,9 @@ rnad_plot <- dat_rnad %>%
 ![](CgH2O2_adaptation_RNAdegradation_plot.png)
 
 
-# . Acute and adapted oxidative stress response comparison
+##  Acute and adapted oxidative stress response comparison
 
-## . Differentially expressed genes during immediate and adaptation to OS
+### 1. Differentially expressed genes during immediate and adaptation to OS
 ```{r, echo=FALSE,eval=TRUE, message=FALSE, warning=FALSE}
 dat_deg <- tibble::tribble(
                            ~Gene,  ~Up, ~Down,
@@ -238,7 +243,7 @@ deg_plot <- dat_deg %>% gather(class,count, -Gene) %>%
 ```
 ![](CgH2O2_DEG_count.png)
 
-## . Genes overlapping between immediate and adaptation to OS
+### 2. Genes overlapping between immediate and adaptation to OS
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 library(UpSetR)
@@ -258,10 +263,10 @@ upset_venn <- upset(fromList(c),
           sets.bar.color = c( "blue","blue", "red", "red"),
           text.scale=2, sets.x.label = "No. of genes")
 
-print(upset_venn)
 ```
+![](CgH2O2_immediate_adapt_vennplot.png)
 
-## . Functional enrichment of oxidative stress response genes
+### 3. Functional enrichment of oxidative stress response genes
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 dat_acute_adapt <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_GO.txt", col_names = TRUE)
@@ -286,7 +291,7 @@ dat_acute_adapt_plot <- dat_acute_adapt %>%
 ```
 ![](CgH2O2_immediate_adapt_plot_GO.png)
 
-# . Antagonistic metabolic processes
+## Antagonistic metabolic processes
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
@@ -309,7 +314,7 @@ gg_antagonsitic_pathways <- mylist %>% inner_join(dat_boxplot, by=c("group_membe
 ```
 ![](CgH2O2_adaptation_oppositePathways_plot.png)
 
-# . Virulence, biofilm formation and drug transport genes
+## Virulence, biofilm formation and drug transport genes
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 dat_virulence <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_biofilm_drug_virulence.txt",  col_names = TRUE)
