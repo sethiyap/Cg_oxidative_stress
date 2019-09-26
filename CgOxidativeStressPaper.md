@@ -22,9 +22,6 @@ output:
 suppressPackageStartupMessages(library(tidyverse))
 expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
 glimpse(expression_file)
-```
-
-```
 ## Observations: 5,263
 ## Variables: 5
 ## $ ORF   <chr> "CAGL0B03069g", "CAGL0D01298g", "CAGL0I02200g", "CAGL0J076…
@@ -32,9 +29,7 @@ glimpse(expression_file)
 ## $ `15m` <dbl> 1.04786322, 0.10699520, 0.29268980, 0.91228699, 1.75870830…
 ## $ `30m` <dbl> 2.1840691, 1.1594894, 1.0268700, 2.6502102, 2.4353285, 2.3…
 ## $ `4h`  <dbl> -1.697379, -2.728006, -2.208331, -1.875563, -4.267266, -2.…
-```
 
-```r
 expression_file_long <- expression_file %>% 
                               dplyr::select(-c("4h")) %>%
                               gather(Time, LFC,-ORF) %>%
@@ -95,14 +90,9 @@ v1 = lapply(gg_1,unique)
 
 c1 = lapply(v1, function(x) x[!x %in% ""])
 lengths(c1)
-```
-
-```
 ## Down_30m Down_15m  Down_5m   Up_30m   Up_15m    Up_5m 
 ##      911      292        7     1045      387       49
-```
 
-```r
 names(c1)=factor(names(c1))
 upset_venn1 <- upset(fromList(c1), 
           nsets = ncol(dat_venn),
@@ -114,12 +104,13 @@ upset_venn1 <- upset(fromList(c1),
 print(upset_venn1)
 ```
 
-![](CgOxidativeStressPaper_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+<img src="README_figs/README-unnamed-chunk-4-1.png" width="672" />
 
 
 ## . Classification of genes based on expression in acute oxidative stress across time-point
 
 ```r
+
 group_genes <- expression_file %>% 
                     dplyr::select(-c("4h")) %>%
                     mutate(Group = if_else( `15m` >= 1 & `30m` >= 1 & `5m` > -1 & `5m` < 1, "Group I", 
@@ -143,12 +134,10 @@ GO analysis was performed for each group using FungiDb
 
 
 ```r
+
 dat_go <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_lineplotGO.txt",  col_names = TRUE)
                                                              
 glimpse(dat_go)
-```
-
-```
 ## Observations: 30
 ## Variables: 5
 ## $ Name         <chr> "alpha-amino acid biosynthetic process", "antibioti…
@@ -156,9 +145,7 @@ glimpse(dat_go)
 ## $ Result_count <dbl> 13, 14, 5, 3, 2, 5, 11, 51, 27, 7, 96, 92, 66, 44, …
 ## $ Pvalue       <dbl> 3.992280e-04, 3.380000e-07, 7.000000e-06, 1.354740e…
 ## $ group        <chr> "Group I", "Group I", "Group I", "Group I", "Group …
-```
 
-```r
 GO_group <- dat_go %>% 
           dplyr::mutate( percent=100*(Result_count/Bgd_count), 
                  Pvalue=-log10(Pvalue), Pvalue=if_else(Pvalue>25, 25, if_else(Pvalue< 25 & Pvalue>18, 18, Pvalue ))) %>%
@@ -214,12 +201,10 @@ gg_growth <- ggplot(summ_dat,aes(Time, mean, color=condition))+geom_line(lwd=0.8
 ## . RNAP subunits expression
 
 ```r
+
 dat_rnap <- read_delim("CgH2O2_adaptation_RNAP.txt", delim="\t", col_names = TRUE)
 
 glimpse(dat_rnap)
-```
-
-```
 ## Observations: 30
 ## Variables: 6
 ## $ ORF           <chr> "CgRPC82", "CgRET1", "CgRPC31", "CAGL0H08415g", "C…
@@ -228,9 +213,7 @@ glimpse(dat_rnap)
 ## $ `30m`         <dbl> -2.9608283, -2.5231335, -2.5906726, -3.1040271, -3…
 ## $ `4h`          <dbl> -1.55504603, -0.04695025, 1.43734991, 1.61704269, …
 ## $ RNAP_subunits <chr> "III", "III", "III", "III", "III", "III", "III", "…
-```
 
-```r
 rnap_plot <- dat_rnap %>%
                     dplyr::select(c("ORF", "4h", "RNAP_subunits")) %>%
                     mutate( ORF=factor(ORF, levels=unique(ORF))) %>%
@@ -245,19 +228,15 @@ rnap_plot <- dat_rnap %>%
 ## . RNA degradation 
 
 ```r
+
 dat_rnad <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_adaptation_RNAdegradation.txt", col_names = TRUE)
 
 glimpse(dat_rnad)
-```
-
-```
 ## Observations: 60
 ## Variables: 2
 ## $ ORF <chr> "CgDCS1", "CgENO1", "CAGL0I05698g", "CgMOT2", "CgDHH1", "CgL…
 ## $ lfc <dbl> -3.0116583, -1.1266304, -1.1219971, -1.1195330, -0.8840226, …
-```
 
-```r
 rnad_plot <- dat_rnad %>%
                     dplyr::arrange(desc(lfc)) %>%
                     mutate( ORF=factor(ORF, levels=unique(ORF))) %>%
@@ -278,6 +257,7 @@ rnad_plot <- dat_rnad %>%
 
 
 ```r
+
 deg_plot <- dat_deg %>% gather(class,count, -Gene) %>% 
             dplyr::arrange(desc(Gene)) %>% 
             mutate(class=factor(class, levels = unique(class)), Gene=factor(Gene, levels = unique(Gene))) %>%
@@ -292,6 +272,7 @@ deg_plot <- dat_deg %>% gather(class,count, -Gene) %>%
 ## . Genes overlapping between immediate and adaptation to OS
 
 ```r
+
 library(UpSetR)
 dat_venn <-  read.table("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_venn_input.txt", sep="\t", header=TRUE)
 gg = as.list(dat_venn)
@@ -300,14 +281,9 @@ v = lapply(gg,unique)
 
 c = lapply(v, function(x) x[!x %in% ""])
 lengths(c)
-```
-
-```
 ##     adapt_Down       adapt_Up immediate_Down   immediate_Up 
 ##           1503           1574           1002           1139
-```
 
-```r
 names(c)=factor(names(c))
 upset_venn <- upset(fromList(c), 
           nsets = ncol(dat_venn),
@@ -319,17 +295,15 @@ upset_venn <- upset(fromList(c),
 print(upset_venn)
 ```
 
-![](CgOxidativeStressPaper_files/figure-html/unnamed-chunk-11-1.png)<!-- -->
+<img src="README_figs/README-unnamed-chunk-12-1.png" width="672" />
 
 ## . Functional enrichment of oxidative stress response genes
 
 ```r
+
 dat_acute_adapt <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_GO.txt", col_names = TRUE)
 
 glimpse(dat_acute_adapt)
-```
-
-```
 ## Observations: 41
 ## Variables: 5
 ## $ Name         <chr> "lipid catabolic process", "antibiotic metabolic pr…
@@ -337,9 +311,6 @@ glimpse(dat_acute_adapt)
 ## $ Result_count <dbl> 20, 24, 11, 9, 62, 8, 33, 57, 12, 9, 3, 4, 2, 2, 94…
 ## $ Pvalue       <dbl> 2.650000e-10, 8.190000e-10, 3.580000e-08, 1.410000e…
 ## $ group        <chr> "Up_Down", "Up_Down", "Up_Down", "Up_Down", "Up_Dow…
-```
-
-```r
 dat_acute_adapt_plot <- dat_acute_adapt %>% 
                               dplyr::mutate(percent=100*(Result_count/Bgd_count), Pvalue=-log10(Pvalue)) %>%
                               dplyr::mutate(Name = forcats::fct_reorder(Name , Pvalue)) %>% 
@@ -362,6 +333,7 @@ dat_acute_adapt_plot <- dat_acute_adapt %>%
 # . Antagonistic metabolic processes
 
 ```r
+
 expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
 
 dat_boxplot <- expression_file %>% dplyr::select(c("ORF", "4h"))
@@ -384,6 +356,7 @@ gg_antagonsitic_pathways <- mylist %>% inner_join(dat_boxplot, by=c("group_membe
 # . Virulence, biofilm formation and drug transport genes
 
 ```r
+
 dat_virulence <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_biofilm_drug_virulence.txt",  col_names = TRUE)
 
 dat_virulence_plot <- dat_virulence %>% dplyr::select(-c(adapt, Class)) %>%
