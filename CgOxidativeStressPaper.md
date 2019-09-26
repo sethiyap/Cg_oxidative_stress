@@ -2,11 +2,9 @@
 *Candida glabrata* response and adaptation to oxidative environment.
 ====================================================================
 
-#### Author:
+#### *Pooja Sethiya*
 
-*Pooja Sethiya*
-
-Koon Ho Wong's lab, University of Macau
+###### Koon Ho Wong's lab, University of Macau
 
 Immediate response to oxidative shock
 -------------------------------------

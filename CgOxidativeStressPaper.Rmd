@@ -1,23 +1,22 @@
 ---
 output:
-  html_document: 
-    keep_md: TRUE
-    toc: TRUE
-    toc_float: 
+    html_document: 
+          toc: TRUE
+          toc_float: TRUE
           toc_collapsed: FALSE
           smooth_scroll: TRUE
-    toc_depth: 3
-    number_sections: FALSE
-    theme: journal
-    highlight: pygments
+          toc_depth: 3
+          # github_document:
+          # variant: markdown_github
+theme: journal
+highlight: pygments
 ---
 
-# *Candida glabrata* response and adaptation to oxidative environment.
 
-#### Author: 
-*Pooja Sethiya*
+##  *Candida glabrata* response and adaptation to oxidative environment. 
 
-Koon Ho Wong's lab, University of Macau
+#### *Pooja Sethiya*
+###### Koon Ho Wong's lab, University of Macau
 
 ## Immediate response to oxidative shock
 
@@ -149,7 +148,7 @@ GO_group <- dat_go %>%
                           axis.text = element_text(color="black", size=12),
                           legend.position = "bottom", legend.direction = "horizontal")+
           guides(fill=FALSE, color=FALSE)
-ggsave(GO_group, filename = "CgH2O2_lineplot_GO.png", width=10, height =7 )
+
 ```
 ![](CgH2O2_lineplot_GO.png)
 
