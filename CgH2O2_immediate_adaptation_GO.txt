@@ -1,0 +1,42 @@
+Name	Bgd_count	Result_count	Pvalue	group
+lipid catabolic process	37	20	2.65e-10	Up_Down
+antibiotic metabolic process	54	24	8.19e-10	Up_Down
+NADP metabolic process	15	11	3.58e-8	Up_Down
+fatty acid beta-oxidation	11	9	1.41e-7	Up_Down
+organonitrogen compound catabolic process	285	62	2.14e-7	Up_Down
+pentose-phosphate shunt	10	8	1.03e-6	Up_Down
+response to oxidative stress	128	33	3.99e-6	Up_Down
+proteolysis	291	57	2.15e-5	Up_Down
+autophagy of mitochondrion	29	12	3.71e-5	Up_Down
+tricarboxylic acid cycle	19	9	1.0128e-4	Up_Down
+glyoxylate cycle	3	3	0.00149081	Up_Down
+trehalose catabolic process	8	4	0.00813567	Up_Down
+mitotic cell cycle G1 arrest in response to pheromone	3	2	0.03622608	Up_Down
+glycogen catabolic process	3	2	0.03622608	Up_Down
+ribosome biogenesis	282	94	1.18e-30	Down_Up
+ncRNA processing	292	95	4.93e-30	Down_Up
+cytoplasmic translation	50	25	1.95e-13	Down_Up
+maturation of SSU-rRNA	90	29	1.28e-9	Down_Up
+mitotic cell cycle	302	55	9.17e-7	Down_Up
+organonitrogen compound biosynthetic process	689	91	3.62e-4	Down_Up
+lipid biosynthetic process	156	27	0.00135335	Down_Up
+RNA surveillance	28	8	0.00345953	Down_Up
+organonitrogen compound biosynthetic process	689	235	2.82e-28	Up_4h
+translation	254	114	2.07e-24	Up_4h
+peptide biosynthetic process	257	114	7.07e-24	Up_4h
+chromosome organization	469	139	5.95e-11	Up_4h
+glycosylation	79	39	1.42e-10	Up_4h
+rRNA transport	12	11	6.05e-8	Up_4h
+carbohydrate derivative biosynthetic process	218	68	9.19e-7	Up_4h
+cell cycle	556	141	2.55e-6	Up_4h
+histone H3-K4 methylation	13	7	0.003710979	Up_4h
+histone acetylation	38	14	0.004448067	Up_4h
+proton transmembrane transport	37	25	3.27e-13	Down_4h
+ATP hydrolysis coupled ion transmembrane transport	16	14	1.73e-10	Down_4h
+purine ribonucleotide metabolic process	107	42	2.72e-10	Down_4h
+oxidative phosphorylation	22	13	1.82e-6	Down_4h
+electron transport chain	23	13	3.63e-6	Down_4h
+generation of precursor metabolites and energy	123	35	4.97e-5	Down_4h
+pH reduction	21	11	5.44e-5	Down_4h
+peroxisome organization	44	16	2.9095e-4	Down_4h
+signal transduction	233	53	5.02109e-4	Down_4h

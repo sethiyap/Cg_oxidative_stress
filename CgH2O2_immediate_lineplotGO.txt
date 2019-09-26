@@ -1,0 +1,31 @@
+Name	Bgd_count	Result_count	Pvalue	group
+alpha-amino acid biosynthetic process	86	13	3.99228e-4	Group I
+antibiotic metabolic process	54	14	3.38e-7	Group I
+oxidant detoxification	8	5	7e-6	Group I
+detoxification of hydrogen peroxide	3	3	1.35474e-4	Group I
+glycogen catabolic process	3	2	0.007670045	Group I
+histidine biosynthetic process	8	5	1.73e-5	Group I
+iron ion homeostasis	38	11	1.93e-6	Group I
+oxidation-reduction process	281	51	3.39e-16	Group I
+response to oxidative stress	128	27	1.67e-10	Group I
+tricarboxylic acid cycle	19	7	2.64e-5	Group I
+organonitrogen compound catabolic process	285	96	1.44e-19	Group II
+proteolysis	291	92	1.03e-16	Group II
+ubiquitin-dependent protein catabolic process	185	66	4.67e-15	Group II
+proteasomal protein catabolic process	127	44	6.19e-10	Group II
+lipid catabolic process	37	20	4.85e-9	Group II
+fatty acid catabolic process	19	13	5.26e-8	Group II
+glycogen biosynthetic process	8	7	5.46e-6	Group II
+trehalose biosynthetic process	7	6	3.59e-5	Group II
+rRNA metabolic process	235	50	3.65e-25	Group III
+ribosome biogenesis	282	50	2.21e-21	Group III
+RNA processing	424	59	8.19e-20	Group III
+maturation of 5.8S rRNA	70	21	4.29e-14	Group III
+cell cycle process	527	44	2.89e-7	Group III
+ncRNA metabolic process	391	188	1.84e-71	Group IV
+ribosome biogenesis	282	139	2.64e-53	Group IV
+RNA modification	93	57	2.57e-28	Group IV
+maturation of 5.8S rRNA	70	41	1.38e-19	Group IV
+tRNA modification	69	40	6.56e-19	Group IV
+methylation	76	38	3.94e-15	Group IV
+translational initiation	44	27	5.29e-14	Group IV
