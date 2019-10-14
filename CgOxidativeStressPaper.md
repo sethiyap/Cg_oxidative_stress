@@ -1,6 +1,6 @@
 
 *Candida glabrata* response and adaptation to oxidative environment.
-====================================================================
+--------------------------------------------------------------------
 
 #### *Pooja Sethiya*
 
@@ -125,7 +125,19 @@ plot_line <- group_genes %>% ggplot(aes(Time, LFC, group=ORF, color=Group))+geom
           geom_hline(yintercept = c(1,-1), linetype=2)
 ```
 
-![](CgH2O2_immediate_lineplot.png)
+![](CgH2O2_immediate_lineplot.png) Number of genes in each group.
+
+``` r
+number_of_genes <- group_genes %>% dplyr::select(c("ORF", "Group"))  %>% unique()
+knitr::kable(table(number_of_genes$Group))
+```
+
+| Var1      |  Freq|
+|:----------|-----:|
+| Group I   |   283|
+| Group II  |   727|
+| Group III |   203|
+| Group IV  |   697|
 
 ### 5. Functional analysis of genes within each group.
 
@@ -178,7 +190,7 @@ Adaptation to oxidative stress
 ``` r
 library(ggalt)
 
-dat_growth_curve <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_growthCurve_forplot.txt", col_names = TRUE) 
+dat_growth_curve <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_growthCurveDifferentConc_set1.txt", col_names = TRUE) 
 
 dat_melt <- dat_growth_curve %>% gather(key="sample", value="OD", -Time) %>% 
           separate(col = sample,into = c("condition","replicate"),sep="_")
@@ -194,11 +206,11 @@ gg_growth <- ggplot(summ_dat,aes(Time, mean, color=condition))+geom_line(lwd=0.8
           theme_bw()+ geom_point(size=1)+
           theme(panel.grid = element_blank(),
                 axis.text = element_text(color="black", size=12))+
-          scale_color_manual(values=c("#800000FF", "#FFA319FF", "#8A9045FF", "#155F83FF"))+ labs(x="Time (in hours)", y="OD600")+
+          scale_color_manual(values=c("#800000FF","#767676FF", "#FFA319FF", "#8A9045FF", "#155F83FF", "#C16622FF", "#8F3931FF"))+ labs(x="Time (in hours)", y="OD600")+
           geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2,position=position_dodge(0.05))
 ```
 
-![](CgH2O2_growthcurve_plot.png)
+![](CgH2O2_growthcurve_differentconc_plot.png)
 
 ### 2. RNAP subunits expression
 
