@@ -23,7 +23,9 @@ highlight: pygments
 ### 1. Number of Differentially expressed genes under each time-point
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
-expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
+
+expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
+
 glimpse(expression_file)
 
 expression_file_long <- expression_file %>% 
@@ -48,7 +50,7 @@ plot_bar <- expression_file_long %>%
                     geom_text(vjust=-0.5, fontface="bold")+
                     labs(x="Time post oxidative stress", y="No. of genes")
 ```
-![](CgH2O2_acute_barplot.png)
+![](plots/CgH2O2_acute_barplot.png)
 
 ### 2. Distribution of genes expression
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
@@ -72,12 +74,12 @@ plot_box <- expression_file_box %>%
                     scale_fill_manual(values = c("#800000FF", "#767676FF", "#FFA319FF"))+
                     labs(x="Time post oxidative stress", y="log2FC")
 ```
-![](CgH2O2_acute_boxplot.png)
+![](plots/CgH2O2_acute_boxplot.png)
 
 ### 3. Overlapping genes upon oxidative shock
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 library(UpSetR)
-dat_venn1 <-  read.table("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_venn_input.txt", sep="\t", header=TRUE)
+dat_venn1 <-  read.table("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_immediate_venn_input.txt", sep="\t", header=TRUE)
 gg_1 = as.list(dat_venn1)
 
 v1 = lapply(gg_1,unique)
@@ -94,7 +96,7 @@ upset_venn1 <- upset(fromList(c1),
           text.scale=2, sets.x.label = "No. of genes")
 
 ```
-![](CgH2O2_immediate_vennplot.png)
+![](plots/CgH2O2_immediate_vennplot.png)
 
 
 ### 4. Classification of genes based on expression in acute oxidative stress across time-point
@@ -117,7 +119,7 @@ plot_line <- group_genes %>% ggplot(aes(Time, LFC, group=ORF, color=Group))+geom
           geom_hline(yintercept = c(1,-1), linetype=2)
 
 ```
-![](CgH2O2_immediate_lineplot.png)
+![](plots/CgH2O2_immediate_lineplot.png)
 Number of genes in each group.
 ```{r, echo=TRUE, eval=TRUE, message=FALSE}
 
@@ -130,7 +132,7 @@ GO analysis was performed for each group using FungiDb
 
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
-dat_go <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_lineplotGO.txt",  col_names = TRUE)
+dat_go <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_immediate_lineplotGO.txt",  col_names = TRUE)
                                                              
 glimpse(dat_go)
 
@@ -156,7 +158,7 @@ GO_group <- dat_go %>%
           guides(fill=FALSE, color=FALSE)
 
 ```
-![](CgH2O2_lineplot_GO.png)
+![](plots/CgH2O2_lineplot_GO.png)
 
 ## Adaptation to oxidative stress
 
@@ -164,7 +166,7 @@ GO_group <- dat_go %>%
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 library(ggalt)
 
-dat_growth_curve <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_growthCurveDifferentConc_set1.txt", col_names = TRUE) 
+dat_growth_curve <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_growthCurveDifferentConc_set1.txt", col_names = TRUE) 
 
 dat_melt <- dat_growth_curve %>% gather(key="sample", value="OD", -Time) %>% 
           separate(col = sample,into = c("condition","replicate"),sep="_")
@@ -183,12 +185,12 @@ gg_growth <- ggplot(summ_dat,aes(Time, mean, color=condition))+geom_line(lwd=0.8
           scale_color_manual(values=c("#800000FF","#767676FF", "#FFA319FF", "#8A9045FF", "#155F83FF", "#C16622FF", "#8F3931FF"))+ labs(x="Time (in hours)", y="OD600")+
           geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=.2,position=position_dodge(0.05))
 ```
-![](CgH2O2_growthcurve_differentconc_plot.png)
+![](plots/CgH2O2_growthcurve_differentconc_plot.png)
 
 ### 2. RNAP subunits expression
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
-dat_rnap <- read_delim("CgH2O2_adaptation_RNAP.txt", delim="\t", col_names = TRUE)
+dat_rnap <- read_delim("data/CgH2O2_adaptation_RNAP.txt", delim="\t", col_names = TRUE)
 
 glimpse(dat_rnap)
 
@@ -201,12 +203,12 @@ rnap_plot <- dat_rnap %>%
                     scale_fill_manual(values=c("#767676FF", "#800000FF", "#FFA319FF","#8A9045FF"))+ 
                     theme_bw()+ geom_hline(yintercept = c(-1,1))
 ```
-![](CgH2O2_adaptation_RNAP_plot.png)
+![](plots/CgH2O2_adaptation_RNAP_plot.png)
 
 ### 3. RNA degradation 
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
-dat_rnad <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_adaptation_RNAdegradation.txt", col_names = TRUE)
+dat_rnad <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_adaptation_RNAdegradation.txt", col_names = TRUE)
 
 glimpse(dat_rnad)
 
@@ -222,7 +224,7 @@ rnad_plot <- dat_rnad %>%
                           )
 
 ```
-![](CgH2O2_adaptation_RNAdegradation_plot.png)
+![](plots/CgH2O2_adaptation_RNAdegradation_plot.png)
 
 
 ##  Acute and adapted oxidative stress response comparison
@@ -246,13 +248,13 @@ deg_plot <- dat_deg %>% gather(class,count, -Gene) %>%
                     theme_bw()+
                     theme(panel.grid = element_blank())
 ```
-![](CgH2O2_DEG_count.png)
+![](plots/CgH2O2_DEG_count.png)
 
 ### 2. Genes overlapping between immediate and adaptation to OS
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
 library(UpSetR)
-dat_venn <-  read.table("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_venn_input.txt", sep="\t", header=TRUE)
+dat_venn <-  read.table("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_immediate_adaptation_venn_input.txt", sep="\t", header=TRUE)
 gg = as.list(dat_venn)
 
 v = lapply(gg,unique)
@@ -269,12 +271,12 @@ upset_venn <- upset(fromList(c),
           text.scale=2, sets.x.label = "No. of genes")
 
 ```
-![](CgH2O2_immediate_adapt_vennplot.png)
+![](plots/CgH2O2_immediate_adapt_vennplot.png)
 
 ### 3. Functional enrichment of oxidative stress response genes
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
-dat_acute_adapt <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_GO.txt", col_names = TRUE)
+dat_acute_adapt <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_immediate_adaptation_GO.txt", col_names = TRUE)
 
 glimpse(dat_acute_adapt)
 dat_acute_adapt_plot <- dat_acute_adapt %>% 
@@ -294,16 +296,16 @@ dat_acute_adapt_plot <- dat_acute_adapt %>%
                                         theme(panel.grid = element_blank(),
                                                   axis.text = element_text(colour = "black", size=12))
 ```
-![](CgH2O2_immediate_adapt_plot_GO.png)
+![](plots/CgH2O2_immediate_adapt_plot_GO.png)
 
 ## Antagonistic metabolic processes
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
-expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
+expression_file <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_immediate_adaptation_OS_LFC.txt",  col_names = TRUE)
 
 dat_boxplot <- expression_file %>% dplyr::select(c("ORF", "4h"))
 
-mylist <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_adaptation_oppositePathways.txt", col_names = TRUE)
+mylist <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_adaptation_oppositePathways.txt", col_names = TRUE)
           
 gg_antagonsitic_pathways <- mylist %>% inner_join(dat_boxplot, by=c("group_member"="ORF")) %>%
           ggplot(aes(name, `4h`, fill=name))+geom_boxplot(notch = FALSE, notchwidth = 0.5)+
@@ -317,12 +319,12 @@ gg_antagonsitic_pathways <- mylist %>% inner_join(dat_boxplot, by=c("group_membe
           guides(fill=FALSE, color=FALSE)
 
 ```
-![](CgH2O2_adaptation_oppositePathways_plot.png)
+![](plots/CgH2O2_adaptation_oppositePathways_plot.png)
 
 ## Virulence, biofilm formation and drug transport genes
 ```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
-dat_virulence <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/CgH2O2_biofilm_drug_virulence.txt",  col_names = TRUE)
+dat_virulence <- readr::read_tsv("https://raw.githubusercontent.com/sethiyap/Cg_oxidative_stress/master/data/CgH2O2_biofilm_drug_virulence.txt",  col_names = TRUE)
 
 dat_virulence_plot <- dat_virulence %>% dplyr::select(-c(adapt, Class)) %>%
           gather(time, value, -gene_name) %>%
@@ -351,6 +353,34 @@ virulence_plot <- dat_virulence_plot %>%
                 legend.key.size = unit(1.5,"line"), panel.grid = element_blank())
 
 ```
-![](CgH2O2_biofilm_drug_virulence_plot.png)
+![](plots/CgH2O2_biofilm_drug_virulence_plot.png)
 
+## Oxidative stress TFs
+```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
 
+data <- tibble::tribble(
+             ~gene_name,     ~`5m`,   ~`15m`,   ~`30m`,     ~`4h`,
+          "CgSKN7", -0.1734, 2.1213, 2.3125,  1.7594,
+          "CgYAP1",  0.1043, 1.1816, 1.8648, -1.7967,
+          "CgMSN4",  0.9653,  3.386, 1.8186, -2.3289,
+          "CgMSN2",  0.2834,  0.198, 0.4728,  3.8464
+          )
+
+```
+
+```{r, echo=TRUE,eval=TRUE, message=FALSE, warning=FALSE}
+
+ gg <- data %>% tidyr::gather(time, value, -gene_name) %>% 
+            dplyr::mutate(time=factor(time, levels=unique(time)), 
+                          gene_name=factor(gene_name, levels = unique(gene_name))) %>%
+                    ggplot2::ggplot(ggplot2::aes(time, value, fill=gene_name))+
+                    ggplot2::facet_wrap(~gene_name,  ncol = 4)+
+                    ggplot2::geom_col(lwd=1.5)+
+                    ggplot2::theme_bw()+
+                    ggplot2::scale_fill_manual(values=c( "#FFA319FF", "#8A9045FF","#350E20FF","#800000FF"))+
+                    ggplot2::labs(x="Time post oxidative stress", y="log2FC")
+
+ ```
+ 
+ ![](plots/Cg_ox_TF_barplot.png)
+ 
