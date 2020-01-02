@@ -2,24 +2,24 @@
 **Candida glabrata** response to stress:
 ----------------------------------------
 
-**Candida glabrata** is the human-pathogenic fungi causing dreadful
+***Candida glabrata*** is the human-pathogenic fungi causing dreadful
 infections in immuno-compromised individuals. It can tolerate high
 levels of oxidative stress (OS) and proliferate inside phagocytes.
 Earlier studies have shown how it responds upon encounter to oxidative
 stress, however how it adapts to OS is not known. Here, we made an
 attempt to understand adaptation of *C. glabrata* to an oxidative
 environment by analyzing transcriptomic data. All the observations have
-been reported in paper entitled: *Transcriptomic analysis reveals global
-and temporal transcription changes during Candida glabrata adaptation to
-an oxidative environment.*
+been reported in paper entitled: **Transcriptomic analysis reveals
+global and temporal transcription changes during** ***Candida
+glabrata*** **adaptation to an oxidative environment.**
 
-[Linked
-here](https://github.com/sethiyap/Cg_oxidative_stress/blob/master/CgOxidativeStressPaper.md)
+**\[Linked
+here\]**(<a href="https://github.com/sethiyap/Cg_oxidative_stress/blob/master/CgOxidativeStressPaper.md" class="uri">https://github.com/sethiyap/Cg_oxidative_stress/blob/master/CgOxidativeStressPaper.md</a>)
 are the scripts used to analyze and generate figures in the entitled
 study.
 
 ### Author
 
-Pooja Sethiya
+#### *Pooja Sethiya*
 
-Faculty of Health Sciences, University of Macau
+###### Koon Ho Wong’s lab, University of Macau
